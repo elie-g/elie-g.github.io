@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Chrono</title>
+    <style>
+      /*<![CDATA[*/
+      @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap");
+
+      body {
+        background-color: #222;
+        color: #35E;
+        margin: 0;
+        padding: 0;
+      }
+
+      .wrapper {
+        font-family: "Inconsolata", monospace;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        font-size: calc(3vw + 4vh + 10vmin);
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /*]]>*/
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="time"></div>
+    </div>
+    
+    <script type="text/javascript">
+      (() => {
+        const el = document.querySelector('.time');
+        const START_TIME = performance.now();
+  
+        const update = () => {
+          el.innerText = formatTime(performance.now() - START_TIME);
+          requestAnimationFrame(update);
+        };
+        update();
+      })();
+
+      function formatTime(micro) {
+        micro = Math.trunc(micro * 1e3);
+        
+        let ms = Math.trunc(micro / 1e3);
+        micro = micro - (ms * 1e3);
+        
+        let secs = Math.trunc(ms / 1e3);
+        ms = ms - (secs * 1e3);
+
+        let mins = Math.trunc(secs / 60);
+        secs = secs - (mins * 60);
+
+        let hours = Math.trunc(mins / 60);
+        mins = mins - (hours * 60);
+  
+        let pad = (t, i = 2) => String(t).padStart(i, "0");
+        hours = pad(hours);
+        mins = pad(mins);
+        secs = pad(secs);
+        
+        pad = (t, i = 3) => String(t).padEnd(i, "0");
+        ms = pad(ms, 3);
+        micro = pad(micro, 3);
+
+        return `${hours}:${mins}:${secs},${ms}.${micro}`;
+      }
+    </script>
+  </body>
+</html>
