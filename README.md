@@ -1,3 +1,2 @@
 # drunkenponey.github.io
- - [/dad](https://drunkenponey.github.io/dad)
- - [/carlsagan42](https://drunkenponey.github.io/carlsagan42)
+ - [Dad](https://drunkenponey.github.io/congrats?msg=birthday_target&target=PAPA&lang=fr)
