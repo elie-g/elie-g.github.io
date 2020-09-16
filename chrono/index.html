@@ -18,7 +18,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        font-size: calc(3vw + 4vh + 10vmin);
+        font-size: 12.5vmin;
         height: 100vh;
         width: 100vw;
         display: flex;
@@ -37,9 +37,14 @@
       (() => {
         const el = document.querySelector('.time');
         const START_TIME = performance.now();
+        let lastLength = 0;
   
         const update = () => {
           el.innerText = formatTime(performance.now() - START_TIME);
+          if (el.innerText.length > lastLength) {
+            lastLength = el.innerText.length;
+            el.parentElement.style.fontSize = (2 * 100 / lastLength) + 'vmin';
+          }
           requestAnimationFrame(update);
         };
         update();
