@@ -43,7 +43,7 @@
           el.innerText = formatTime(performance.now() - START_TIME);
           if (el.innerText.length > lastLength) {
             lastLength = el.innerText.length;
-            el.parentElement.style.fontSize = (2 * 100 / lastLength) + 'vmin';
+            el.parentElement.style.fontSize = `min(100vh, ${2 * 100 / (lastLength - 1)}vw)`;
           }
           requestAnimationFrame(update);
         };
@@ -74,7 +74,7 @@
         ms = pad(ms, 3);
         micro = pad(micro, 3);
 
-        return `${hours}:${mins}:${secs},${ms}.${micro}`;
+        return `${hours}:${mins}:${secs},${ms}\u{200A}\u{200A}${micro}`;
       }
     </script>
   </body>
