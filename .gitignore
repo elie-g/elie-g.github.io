@@ -1,0 +1,17 @@
+### JetBrains
+.idea/
+*.iml
+
+### VS Code
+.vscode/
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+### Backup template
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
