@@ -11,6 +11,9 @@
   const { animation } = await import(`./animations/${msg.animation}.js`);
   
   msg = msg.message[params.lang] || msg.message['en'] || msg.message['fr'];
-  msg = [].concat(msg).flatMap((m) => m.replace(/{utf:([0-9A-Z]+)}/gi, (m, g) => String.fromCharCode(parseInt(g, 16))).replace(/{([\w\-]+)}/g, (m, g) => params[g] || m).split('\n'));
+  msg = [].concat(msg).flatMap((m) =>
+      m.replace(/{([\w\-]+)}/g, (m, g) => params[g] || m)
+       .replace(/{utf:([0-9A-Z]+)}/gi, (m, g) => String.fromCharCode(parseInt(g, 16)))
+       .split('\n'));
   animation(msg, c);
 })()
