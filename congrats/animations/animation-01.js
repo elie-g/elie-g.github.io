@@ -58,7 +58,7 @@ export function animation(message, c) {
   
       letters    = [];
   
-  ctx.font = opts.charSize + 'px "Font Awesome 5 Free"';
+  ctx.font = opts.charSize + 'px Verdana';
   
   class Letter {
     constructor(char, x, y) {
