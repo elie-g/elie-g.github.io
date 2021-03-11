@@ -7,6 +7,13 @@ export default {
     }
   },
 
+  custom: {
+    animation: 'animation-01',
+    message: {
+      en: '{content}',
+    }
+  },
+
   birthday: {
     animation: 'animation-01',
     message: {
@@ -21,5 +28,5 @@ export default {
       en: [ 'HAPPY', 'BIRTHDAY', '{target}!' ],
       fr: [ 'BONNE', 'FÊTE', '{target}!' ]
     }
-  }
+  },
 }
