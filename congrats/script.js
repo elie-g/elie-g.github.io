@@ -10,7 +10,7 @@ const prepareFontLoad = (fontList) => Promise.all(fontList.map(font => document.
   let msg = (await import('./messages.js')).default;
   msg     = msg[params.msg] || msg['congrats'];
   
-  await prepareFontLoad(['Font Awesome 5 Free', 'Font Awesome 5 Brands']);
+  //await prepareFontLoad(['Font Awesome 5 Free', 'Font Awesome 5 Brands']);
   
   const { animation } = await import(`./animations/${msg.animation}.js`);
   
