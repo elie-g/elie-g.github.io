@@ -15,5 +15,6 @@
       m.replace(/{([\w\-]+)}/g, (m, g) => params[g] || m)
        .replace(/{utf:([0-9A-Z]+)}/gi, (m, g) => String.fromCharCode(parseInt(g, 16)))
        .split('\n'));
+  console.log(msg);
   animation(msg, c);
 })()
