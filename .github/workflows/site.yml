@@ -52,7 +52,7 @@ jobs:
               branch: 'master',
               status: 'success'
             });
-            return { result: runs.data.workflow_runs[0].id };
+            return runs.data.workflow_runs[0].id;
       - name: Download character-reference site artifact
         uses: actions/download-artifact@v8
         with:
