@@ -59,6 +59,7 @@ jobs:
           name: site
           repository: elie-g/character-reference
           path: character-ref/
+          github-token: ${{ secrets.CHARACTER_REFERENCE_TOKEN }}
           run-id: ${{ steps.get-latest-run.outputs.result }}
 
       # Deploy the site to GitHub Pages
