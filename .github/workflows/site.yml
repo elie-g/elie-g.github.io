@@ -1,0 +1,73 @@
+
+name: Publish Site
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - master
+  
+  # Triggered by a repository dispatch event with type 'publish'
+  repository_dispatch:
+    types:
+      - publish
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      # Retrieve character-reference site
+      - name: Get latest run ID of character-reference site
+        id: get-latest-run
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.CHARACTER_REFERENCE_TOKEN }}
+          script: |
+            const runs = await octokit.rest.actions.listWorkflowRuns({
+              owner: 'elie-g',
+              repo: 'character-reference',
+              workflow_id: 'build.yml',
+              branch: 'master',
+              status: 'success'
+            });
+            return { result: runs.data.workflow_runs[0].id };
+      - name: Download character-reference site artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: site
+          repository: elie-g/character-reference
+          path: character-ref/
+          run-id: ${{ steps.get-latest-run.outputs.result }}
+
+      # Deploy the site to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Site to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
