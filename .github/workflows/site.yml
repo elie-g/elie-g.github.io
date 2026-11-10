@@ -54,7 +54,7 @@ jobs:
             });
             return { result: runs.data.workflow_runs[0].id };
       - name: Download character-reference site artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: site
           repository: elie-g/character-reference
